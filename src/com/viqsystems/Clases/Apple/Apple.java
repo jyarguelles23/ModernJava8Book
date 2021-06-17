@@ -6,25 +6,33 @@ import java.awt.*;
 
 public class Apple {
 
-   private Color color;
-   private double weight;
+   private Colors color;
+   private Integer weight;
+   public Apple(){}
 
-    public Apple(int i, Colors green) {
+    public Apple(int weight, Colors color) {
+     this.weight=weight;
+     this.color=color;
     }
 
-    public double getWeight() {
+    public Apple(int weight){
+        this.weight=weight;
+    }
+
+
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public Color getColor(){
+    public Colors getColor(){
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(Colors color) {
         this.color = color;
     }
 }

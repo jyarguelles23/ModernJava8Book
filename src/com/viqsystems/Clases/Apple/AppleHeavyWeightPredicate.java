@@ -6,3 +6,4 @@ public class AppleHeavyWeightPredicate implements ApplePredicate {
         return apple.getWeight() > 150;
     }
 }
+
