@@ -1,11 +1,10 @@
-package com.viqsystems.Clases.MethodReferences;
+package com.viqsystems.MethodReferences;
 
 import com.viqsystems.Clases.Apple.Apple;
 import com.viqsystems.Enums.Colors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.*;
 
