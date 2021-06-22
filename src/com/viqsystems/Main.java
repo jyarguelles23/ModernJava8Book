@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.List;
 import java.util.function.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.viqsystems.Enums.Colors.GREEN;
 import static com.viqsystems.Enums.Colors.RED;
@@ -54,7 +55,9 @@ public class Main {
                 new Transaction(alan, 2012, 950)
         );
 
-
+        Stream.iterate(new int[]{0, 1},t -> new int[]{t[1], t[0]+t[1]})
+                 .limit(20)
+                .forEach(t -> System.out.println("(" + t[0] + "," + t[1] +")"));
 
     }
 

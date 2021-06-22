@@ -5,6 +5,8 @@ import com.viqsystems.Clases.Dish.Dish;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -192,4 +194,62 @@ allMatch, anyMatch, noneMatch, findFirst, and findAny methods of a stream.
 
     //cantidad de elementos en el stream
     long count = menu.stream().count();
+
+
+    //Numeric streams
+    /*IntStream, DoubleStream, and LongStream, which respectively specialize the elements of
+    a stream to be int, long, and double—and thereby avoid hidden boxing costs. Each
+    of these interfaces brings new methods to perform common numeric reductions,
+    such as sum to calculate the sum of a numeric stream and max to find the maximum
+    element. In addition, they have methods to convert back to a stream of objects when
+    necessary. */
+
+
+    /*The most common methods you’ll use to convert a stream to a specialized version are
+    mapToInt, mapToDouble, and mapToLong. These methods work exactly like the method
+    map that you saw earlier but return a specialized stream instead of a Stream<T>.*/
+
+    int calories = menu.stream()
+            .mapToInt(Dish::getCalories) // returns IntStream
+            .sum();
+
+    IntStream intStream = menu.stream().mapToInt(Dish::getCalories); //Converts a Stream to a numeric stream
+    Stream<Integer> stream = intStream.boxed();   // Converts the numeric stream to a Stream
+
+    //0 is not a valid max element
+    OptionalInt maxCalories = menu.stream()
+            .mapToInt(Dish::getCalories)
+            .max();
+    int max = maxCalories.orElse(1);
+
+    //Range
+    //range is exclusive, whereas rangeClosed is inclusive
+    IntStream evenNumbers = IntStream.rangeClosed(1, 100)
+            .filter(n -> n % 2 == 0);
+    //System.out.println(evenNumbers.count());
+
+        public void streamsFromValues(){
+            Stream<String> stream = Stream.of("Modern ", "Java ", "In ", "Action");
+            stream.map(String::toUpperCase).forEach(System.out::println);
+        }
+
+    //Streams from functions: creating infinite streams!
+    public void streamIterate(){
+        Stream.iterate(new int[]{0, 1},t -> new int[]{t[1], t[0]+t[1]})
+                .limit(20)
+                .forEach(t -> System.out.println("(" + t[0] + "," + t[1] +")"));
+        /*
+        In Java 9, the iterate method was enhanced with support for a predicate.
+         For example, you can generate numbers starting at 0 but stop the iteration once the number is greater than 100:
+        * */
+        IntStream.iterate(0, n -> n < 100, n -> n + 4)
+                .forEach(System.out::println);
+    }
+
+    public void streamGenerate(){
+        Stream.generate(Math::random)
+                .limit(5)
+                .forEach(System.out::println);
+    }
+
 }
