@@ -7,16 +7,14 @@ import com.viqsystems.Clases.Transaction.Transaction;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.*;
 
 public class StreamCollectionExamples {
     public enum CaloricLevel { DIET, NORMAL, FAT }
-
     Map<String, List<String>> dishTags = new HashMap<>();
-
-
     List<Dish> menu = Arrays.asList(
             new Dish("pork", false, 800, Dish.Type.MEAT),
             new Dish("beef", false, 700, Dish.Type.MEAT),
@@ -198,5 +196,12 @@ public class StreamCollectionExamples {
                                 collectingAndThen(maxBy(comparingInt(Dish::getCalories)),
                                         Optional::get)));
     }
+
+      // customCollections
+        public Map<Boolean, List<Integer>> partitionPrimesWithCustomCollector(int n) {
+            return IntStream.rangeClosed(2, n).boxed()
+                    .collect(new PrimeNumbersCollector());
+        }
+
 
 }
